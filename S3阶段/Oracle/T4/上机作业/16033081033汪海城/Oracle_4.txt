@@ -1,0 +1,50 @@
+Select abs(-15) from dual; 
+select ceil(44.32)from dual;
+select floor(56.56)from dual;
+select sysdate from dual;
+select power(5,3)from dual;
+select initcap('hello') from dual;
+select lower('AAAA') from dual;
+select upper('aaaa') from dual;
+select length(' 123 ') from dual;
+select ltrim('abcdefg','abc') from dual;
+select rtrim('abcdefg','efg') from dual;
+select trim('  123  ')from dual;
+select translate('tom','t','m')from dual;
+select replace('tom and tom','t','m')from dual; 
+select instr('helloworld','o') from dual;
+select substr('computer system','8','10') from dual;
+select concat('hello','world') from dual;
+
+select sysdate,add_months(sysdate,3) from dual;
+
+--函数
+select months_between ((select hiredate from emp where empno=7369),sysdate) from dual;
+
+select next_day(sysdate,2) from dual;
+
+select last_day(sysdate) from dual;
+
+select to_char(sysdate,'yyyy-mm-dd') from dual;
+
+select to_date('2010-12-13','yyyy-mm-dd') from dual;
+
+select to_char(sysdate,'yyyy-mm-dd dy am hh:mi:ss') from dual;
+
+select to_number('$123,555.00','$999,999.99') from dual;
+
+select ename,nvl(comm,'10') from emp;
+--高级子查询
+select * from emp where(empno,sal) in (select empno,sal from emp where deptno=30);
+--标量子查询
+select empno,ename,
+       case job 
+       when 'CLERK' then '店员'
+       when 'SALESMAN' then '推销员'
+       else job
+      end
+from emp;
+--一次性测试
+select d.* from dept d where exists (select e.* from emp e where e.deptno=d.deptno);
+
+select d.* from dept d where not exists (select e.* from emp e where e.deptno=d.deptno); 
